@@ -1,7 +1,7 @@
 <?php
 /**
  * Plugin Name: Label Barcode Lawasan
- * Plugin URI: /
+ * Plugin URI: https://github.com/heroesoebekti/label_barcode_classic
  * Description: Label Barcode Lawasan adalah plugin label barcode yang paling anda butuhkan
  * Version: 0.0.1
  * Author: Heru Subekti
