@@ -189,7 +189,7 @@ if (isset($_GET['action']) AND $_GET['action'] == 'settings') {
 // barcode pdf download
 if (isset($_GET['action']) AND $_GET['action'] == 'print') {
   // check if label session array is available
-  if (!isset($_SESSION['barcodes']) && count($_SESSION['barcodes']) < 1) {
+  if (!isset($_SESSION['barcodes']) || count($_SESSION['barcodes']) < 1) {
     utility::jsToastr('Label Barcode Lawasan', __('There is no data to print!'), 'warning');
     die();
   }
