@@ -12,4 +12,4 @@
 $plugin = \SLiMS\Plugins::getInstance();
 
 // registering menus
-$plugin->registerMenu('bibliography', 'Label Barcode Classic', __DIR__ . '/index.php');
+$plugin->registerMenu('bibliography', 'Classic Label Barcode', __DIR__ . '/index.php');
