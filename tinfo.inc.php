@@ -10,7 +10,7 @@ $sysconf['plugin']['option'][$plugin_name] = [
         'dbfield' => 'barcode_dimension',
         'label' => __('Global Configuration'),
         'type' => 'anything',
-        'default' => '<div class="alert alert-info">berisi aturan global, ukuran label, font yang digunakan dsb.</div>'
+        'default' => '<div class="alert alert-info">Contains global rules, label size, fonts use, etc.</div>'
     ], 
     'barcode_fonts' => [
         'dbfield' => 'barcode_fonts',
@@ -94,7 +94,7 @@ $sysconf['plugin']['option'][$plugin_name] = [
         'dbfield' => 'callnumber_section',
         'label' => __('Callnumber Section'),
         'type' => 'anything',
-        'default' => '<div class="alert alert-info">pengaturan untuk bidang nomor panggil, ukuran, posisi, dan tata letak</div>'
+        'default' => '<div class="alert alert-info">Configurations for call number field, size, position, and layout.</div>'
     ],
     'callnumber_align' => [
         'dbfield' => 'callnumber_align',
@@ -125,7 +125,7 @@ $sysconf['plugin']['option'][$plugin_name] = [
         'dbfield' => 'header_section',
         'label' => __('Header Section'),
         'type' => 'anything',
-        'default' => '<div class="alert alert-info">pengaturan untuk bidang header, ukuran, warna, dan tampilan</div>'
+        'default' => '<div class="alert alert-info">Configurations for header field, size, color, and look.</div>'
     ],                 
     'barcode_include_header_text' => [
         'dbfield' => 'barcode_include_header_text',
@@ -157,7 +157,7 @@ $sysconf['plugin']['option'][$plugin_name] = [
         'dbfield' => 'barcode_section',
         'label' => __('Barcode Section'),
         'type' => 'anything',
-        'default' => '<div class="alert alert-info">Pengaturan untuk bidang barcode</div>'
+        'default' => '<div class="alert alert-info">Configuration for barcode field.</div>'
     ], 
     'barcode_type' => [
         'dbfield' => 'barcode_type',
@@ -187,7 +187,7 @@ $sysconf['plugin']['option'][$plugin_name] = [
         'data' => [
             ['cc', __('Clockwise')],
             ['cw', __('Counter Clockwise')],
-            ['', __('Lanscape')]            
+            ['', __('Landscape')]            
         ]
     ], 
     'barcode_col_size' => [
@@ -225,7 +225,7 @@ $sysconf['plugin']['option'][$plugin_name] = [
         'dbfield' => 'color_section',
         'label' => __('Custom Header Color'),
         'type' => 'anything',
-        'default' => '<div class="alert alert-info">menyesuaikan warna header tiap klasifikasi</div>'
+        'default' => '<div class="alert alert-info">Make color adjusment to header for classification.</div>'
     ],   
     'color_header' => [
         'dbfield' => 'color_header',
@@ -337,6 +337,6 @@ $sysconf['plugin']['option'][$plugin_name] = [
         'dbfield' => 'restore',
         'label' => __('Restore'),
         'type' => 'anything',
-        'default' => '<div class=""><a href="'.$php_self.'_reset">restore default settings</a></div>'
+        'default' => '<div class=""><a href="'.$php_self.'_reset">Restore default settings</a></div>'
     ],               
 ];
