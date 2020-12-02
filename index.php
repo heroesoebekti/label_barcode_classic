@@ -99,8 +99,6 @@ if (isset($_POST['itemID']) AND !empty($_POST['itemID']) AND isset($_POST['itemA
       $barcode_text = str_replace(array(' ', '/', '\/'), '_', $barcode_text);
       /* replace invalid characters */
       $barcode_text = str_replace(array(':', ',', '*', '@'), '', $barcode_text);
-      // send ajax request
-      echo 'jQuery.ajax({ url: \''.SWB.'lib/phpbarcode/barcode.php?code='.$itemID.'&encoding='.$sysconf['barcode_encoding'].'&scale='.$size.'&mode=png\', type: \'GET\', error: function() { alert(\'Error creating barcode!\'); } });'."\n";
       // add to sessions
       $_SESSION['barcodes'][$itemID] = $itemID;
       $print_count++;
@@ -239,6 +237,7 @@ if (isset($_GET['action']) AND $_GET['action'] == 'print') {
   $html_str .= '<html><head><title>Label Barcode Label Print Result</title>'."\n";
   $html_str .= '<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />';
   $html_str .= '<meta http-equiv="Pragma" content="no-cache" /><meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate, post-check=0, pre-check=0" /><meta http-equiv="Expires" content="Sat, 26 Jul 1997 05:00:00 GMT" />';
+  $html_str .= '<script type="text/javascript" src="../plugins/label_barcode_classic/src/JsBarcode.all.min.js"></script>';
   $html_str .= '<script type="text/javascript" src="../plugins/label_barcode_classic/src/qrcode.min.js"></script>';
   $html_str .= '<style type="text/css">'."\n";
   $html_str .= 'body { padding: 0; margin: 1mm; font-family: '.$sysconf[$plugin_name]['barcode_fonts'].'; font-size: '.$sysconf[$plugin_name]['barcode_font_size'].'pt; background: #fff; }'."\n";
@@ -260,8 +259,7 @@ if (isset($_GET['action']) AND $_GET['action'] == 'print') {
   $margin_l = $sysconf[$plugin_name]['callnumber_align']=='left'?($barcode+$sysconf[$plugin_name]['callnumber_padding_size']):($sysconf[$plugin_name]['callnumber_align']=='right'?($barcode-$sysconf[$plugin_name]['callnumber_padding_size']):$barcode);
 
   $html_str .= '.left > .callNum{  text-align:'.$sysconf[$plugin_name]['callnumber_align'].'; margin-left: '.$margin_l.'mm;  width: '.($lebar-$barcode).'mm;}'."\n";
-  $barcode_r = $sysconf[$plugin_name]['barcode_rotate']==''?'margin-top:10px; ':'';
-  $html_str .= '.img_code{ width: '.$sysconf[$plugin_name]['barcode_scale'].'%; height:75%; padding:-5px; border:0px; '.$barcode_r.' }'."\n";
+  $html_str .= '.img_code{ width: '.$sysconf[$plugin_name]['barcode_scale'].'%; height:75%; padding:-5px; border:0px;}'."\n";
   $html_str .= '.title{  font-size:8pt;}'."\n";
   $html_str .= '</style>'."\n";
   $html_str .= '</head>'."\n";
@@ -277,14 +275,14 @@ if (isset($_GET['action']) AND $_GET['action'] == 'print') {
        $html_str .= '<div class="barcode">'."\n";
        $html_str .= '<div class="'.($sysconf[$plugin_name]['barcode_type']=='bar'?$sysconf[$plugin_name]['barcode_rotate']:'').'">'."\n";
        $title_cut = strlen($barcode[0])>$sysconf[$plugin_name]['barcode_cut_title']?substr($barcode[0], 0,$sysconf[$plugin_name]['barcode_cut_title']).' ...':$barcode[0];
-       $html_str .= '<div class="title" style="'.($sysconf[$plugin_name]['barcode_rotate']==''||$sysconf[$plugin_name]['barcode_type']!='bar'?'padding-top:10px;padding-bottom:5px;':'').'">'.$title_cut.'</div>'."\n";
+       $html_str .= '<div class="title" style="'.($sysconf[$plugin_name]['barcode_rotate']==''||$sysconf[$plugin_name]['barcode_type']!='bar'?'padding-top:10px;':'').'">'.$title_cut.'</div>'."\n";
        if($sysconf[$plugin_name]['barcode_type']=='bar'){
-          $html_str .= '<img class="img_code" src="'.SWB.IMG.'/barcodes/'.str_replace(array(' '), '_', $barcode[1]).'.png"/>'."\n";
+       $html_str .= '<svg class="img_code" id="code128-'.$barcode[1].'"></svg><script type="text/javascript">JsBarcode("#code128-'.$barcode[1].'", "'.$barcode[1].'");</script>';
        }else{       
        $qr = $sysconf[$plugin_name]['barcode_box_height']<$sysconf[$plugin_name]['barcode_col_size']?
-       array('size'=>$sysconf[$plugin_name]['barcode_box_height']*2.5, 'width'=>30):
+       array('size'=>$sysconf[$plugin_name]['barcode_box_height']*2.5, 'width'=>50):
        array('size'=>$sysconf[$plugin_name]['barcode_col_size']*3, 'width'=>80);
-       $html_str .= '<div class="img_code" id="qrcode_'.$barcode[1].'" style="display: block; margin-left: auto;margin-right: auto;width: '.$qr['width'].'%;"></div><div class="title">'.$barcode[1].'</div><script type="text/javascript">new QRCode("qrcode_'.$barcode[1].'", { text: "'.$barcode[1].'", width: '.$qr['size'].', height: '.$qr['size'].', correctLevel : QRCode.CorrectLevel.L });</script>';
+       $html_str .= '<div class="img_code" id="qrcode_'.$barcode[1].'" style="display: block; margin-left: auto;margin-right: auto;width: '.$qr['width'].'%;padding:5px;"></div><div class="title">'.$barcode[1].'</div><script type="text/javascript">new QRCode("qrcode_'.$barcode[1].'", { text: "'.$barcode[1].'", width: '.$qr['size'].', height: '.$qr['size'].', correctLevel : QRCode.CorrectLevel.L });</script>';
        }
        $html_str .= '</div>'."\n";
        $html_str .= '</div>'."\n";
