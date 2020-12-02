@@ -110,9 +110,9 @@ if (isset($_POST['itemID']) AND !empty($_POST['itemID']) AND isset($_POST['itemA
   sleep(2);
   if (isset($limit_reach)) {
     $msg = str_replace('{max_print}', $max_print, __('Selected items NOT ADDED to print queue. Only {max_print} can be printed at once'));
-      utility::jsToastr('Label Barcode Lawasan', $msg,'warning');
+      utility::jsToastr('Classic Label & Barcode', $msg,'warning');
   } else {
-      utility::jsToastr('Label Barcode Lawasan', __('Selected items added to print queue'),'success');
+      utility::jsToastr('Classic Label & Barcode', __('Selected items added to print queue'),'success');
   }
   exit();
 }
@@ -121,7 +121,7 @@ if (isset($_POST['itemID']) AND !empty($_POST['itemID']) AND isset($_POST['itemA
 if (isset($_GET['action']) AND $_GET['action'] == 'clear') {
   // update print queue count object
   echo '<script type="text/javascript">top.$(\'#queueCount\').html(\'0\');</script>';
-  utility::jsToastr('Label Barcode Lawasan', __('Print queue cleared!'));
+  utility::jsToastr('Classic Label & Barcode', __('Print queue cleared!'));
   unset($_SESSION['barcodes']);
   exit();
 }
@@ -131,7 +131,7 @@ if (isset($_GET['action']) AND $_GET['action'] == 'settings_reset') {
       global $dbs;
       $sql_op = new simbio_dbop($dbs);        
       $delete = $sql_op->delete('setting',  "setting_name='{$plugin_name}'");  
-      utility::jsAlert('Settings restore to default!');   
+      utility::jsAlert('Restore setting to default!');   
       echo '<script type="text/javascript">location.reload();</script>';
       die();    
 }
@@ -188,7 +188,7 @@ if (isset($_GET['action']) AND $_GET['action'] == 'settings') {
 if (isset($_GET['action']) AND $_GET['action'] == 'print') {
   // check if label session array is available
   if (!isset($_SESSION['barcodes']) || count($_SESSION['barcodes']) < 1) {
-    utility::jsToastr('Label Barcode Lawasan', __('There is no data to print!'), 'warning');
+    utility::jsToastr('Classic Label & Barcode', __('There is no data to print!'), 'warning');
     die();
   }
 
@@ -234,7 +234,7 @@ if (isset($_GET['action']) AND $_GET['action'] == 'print') {
    
   // create html ouput
   $html_str  = '<!DOCTYPE html>'."\n";
-  $html_str .= '<html><head><title>Label Barcode Label Print Result</title>'."\n";
+  $html_str .= '<html><head><title>Classic Label & Barcode Print Result</title>'."\n";
   $html_str .= '<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />';
   $html_str .= '<meta http-equiv="Pragma" content="no-cache" /><meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate, post-check=0, pre-check=0" /><meta http-equiv="Expires" content="Sat, 26 Jul 1997 05:00:00 GMT" />';
   $html_str .= '<script type="text/javascript" src="../plugins/label_barcode_classic/src/JsBarcode.all.min.js"></script>';
@@ -326,7 +326,7 @@ if (isset($_GET['action']) AND $_GET['action'] == 'print') {
     // update print queue count object
     echo '<script type="text/javascript">parent.$(\'#queueCount\').html(\'0\');</script>';
     // open result in window
-    echo '<script type="text/javascript">top.$.colorbox({href: "'.SWB.FLS.'/'.$print_file_name.'", iframe: true, width: 800, height: 500, title: "'.__('Label Barcodes Lawasan').'"})</script>';
+    echo '<script type="text/javascript">top.$.colorbox({href: "'.SWB.FLS.'/'.$print_file_name.'", iframe: true, width: 800, height: 500, title: "'.__('Classic Label & Barcodes').'"})</script>';
   } else { utility::jsAlert('ERROR! Label barcodes failed to generate, possibly because '.SB.FLS.' directory is not writable'); }
   exit();
 }
@@ -335,13 +335,13 @@ if (isset($_GET['action']) AND $_GET['action'] == 'print') {
 <fieldset class="menuBox">
 <div class="menuBoxInner printIcon">
   <div class="per_title">
-      <h2><?= __('Label Barcode Classic'); ?></h2>
+      <h2><?= __('Classic Label & Barcode Printing'); ?></h2>
   </div>
   <div class="sub_section">
       <div class="btn-group">
       <a target="blindSubmit" href="<?= $php_self; ?>&action=clear" class="notAJAX btn btn-default"><i class="glyphicon glyphicon-trash"></i>&nbsp;<?= __('Clear Print Queue'); ?></a>
-      <a target="blindSubmit" href="<?= $php_self; ?>&action=print" class="notAJAX btn btn-default"><i class="glyphicon glyphicon-print"></i>&nbsp;<?= __('Print Barcodes for Selected Data');?></a>
-        <a href="<?= $php_self; ?>&action=settings" class="notAJAX btn btn-info openPopUp" title="<?= __('Change label barcode settings'); ?>"><i class="fa fa-gear"></i></a>
+      <a target="blindSubmit" href="<?= $php_self; ?>&action=print" class="notAJAX btn btn-default"><i class="glyphicon glyphicon-print"></i>&nbsp;<?= __('Print for Selected Data');?></a>
+        <a href="<?= $php_self; ?>&action=settings" class="notAJAX btn btn-info openPopUp" title="<?= __('Change classic label & barcode settings'); ?>"><i class="fa fa-gear"></i></a>
       </div>
     <form name="search" action="<?= $php_self; ?>" id="search" method="get" class="form-inline"><?= __('Search'); ?> :
     <input type="text" name="keywords" size="30" class="form-control col-md-5"/>
@@ -416,7 +416,7 @@ $datagrid->table_header_attr = 'class="dataListHeader" style="font-weight: bold;
 // edit and checkbox property
 $datagrid->edit_property = false;
 $datagrid->chbox_property = array('itemID', __('Add'));
-$datagrid->chbox_action_button = __('Add To Print Queue');
+$datagrid->chbox_action_button = __('Add to print queue');
 $datagrid->chbox_confirm_msg = __('Add to print queue?');
 $datagrid->column_width = array('10%', '20%','70%');
 // set checkbox action URL
