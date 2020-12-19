@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Classic Label & Barcode
  * Plugin URI: https://github.com/heroesoebekti/label_barcode_classic
- * Description: The label & barcode you'll like the most.
+ * Description: The colorfull label & barcode you'll like the most. Label & item barcode in one place. Available with QRcode as barcode replacement.
  * Version: 0.0.1
  * Author: Heru Subekti
  * Author URI: https://www.facebook.com/heroe.soebekti

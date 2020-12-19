@@ -276,6 +276,7 @@ if (isset($_GET['action']) AND $_GET['action'] == 'print') {
   // loop the chunked arrays to row
   foreach ($chunked_barcode_arrays as $barcode_rows) {
     $html_str .= '<tr>'."\n";
+    $n = 1;
     foreach ($barcode_rows as $barcode) {
        $html_str .= '<td><div class="box '.$sysconf[$plugin_name]['barcode_position'].'">'."\n";
        $html_str .= '<div class="barcode">'."\n";
@@ -284,7 +285,6 @@ if (isset($_GET['action']) AND $_GET['action'] == 'print') {
        $html_str .= '<div class="title" style="'.($sysconf[$plugin_name]['barcode_rotate']==''||$sysconf[$plugin_name]['barcode_type']!='bar'?'padding-top:10px;':'').'">'.$title_cut.'</div>'."\n";
        if($sysconf[$plugin_name]['barcode_type']=='bar'){
        $html_str .= '<svg class="img_code" id="code128-'.$n.'"></svg><script type="text/javascript">JsBarcode("#code128-'.$n.'", "'.$barcode[1].'");</script>';
-       $n++;
        }else{       
        $qr = $sysconf[$plugin_name]['barcode_box_height']<$sysconf[$plugin_name]['barcode_col_size']?
        array('size'=>$sysconf[$plugin_name]['barcode_box_height']*2.5, 'width'=>50):
@@ -316,6 +316,7 @@ if (isset($_GET['action']) AND $_GET['action'] == 'print') {
        $html_str .= '</div>'."\n";
        $html_str .= '</div>'."\n";
        $html_str .= '</td>'."\n";
+       $n++;
     }
     $html_str .= '</tr>'."\n";
   }
