@@ -48,6 +48,7 @@ if(isset($_POST['saveData'])){
         if (!$update) {
           return $dbs->error;
         }else{
+          echo "<meta http-equiv='refresh' content='0;url=$php_self'>";
           utility::jsAlert('Settings saved!');
         }
       } else {
@@ -57,11 +58,15 @@ if(isset($_POST['saveData'])){
         if (!$insert) {
           return $dbs->error;
         }else{
+          echo "<meta http-equiv='refresh' content='0;url=$php_self'>";
           utility::jsAlert('Settings Saved!');
         }
       }  
-    unset($_POST); 
-    die();
+    
+          //echo '<script type="text/javascript">window.location = window.location.href+"?rnd="+Math.random();</script>';
+          unset($_POST); 
+      exit();   
+    //die();
 }
 
 /* RECORD OPERATION */
@@ -270,6 +275,7 @@ if (isset($_GET['action']) AND $_GET['action'] == 'print') {
   // loop the chunked arrays to row
   foreach ($chunked_barcode_arrays as $barcode_rows) {
     $html_str .= '<tr>'."\n";
+    $n = 1;
     foreach ($barcode_rows as $barcode) {
        $html_str .= '<td><div class="box '.$sysconf[$plugin_name]['barcode_position'].'">'."\n";
        $html_str .= '<div class="barcode">'."\n";
@@ -277,7 +283,7 @@ if (isset($_GET['action']) AND $_GET['action'] == 'print') {
        $title_cut = strlen($barcode[0])>$sysconf[$plugin_name]['barcode_cut_title']?substr($barcode[0], 0,$sysconf[$plugin_name]['barcode_cut_title']).' ...':$barcode[0];
        $html_str .= '<div class="title" style="'.($sysconf[$plugin_name]['barcode_rotate']==''||$sysconf[$plugin_name]['barcode_type']!='bar'?'padding-top:10px;':'').'">'.$title_cut.'</div>'."\n";
        if($sysconf[$plugin_name]['barcode_type']=='bar'){
-       $html_str .= '<svg class="img_code" id="code128-'.$barcode[1].'"></svg><script type="text/javascript">JsBarcode("#code128-'.$barcode[1].'", "'.$barcode[1].'");</script>';
+       $html_str .= '<svg class="img_code" id="code128-'.$n.'"></svg><script type="text/javascript">JsBarcode("#code128-'.$n.'", "'.$barcode[1].'");</script>';
        }else{       
        $qr = $sysconf[$plugin_name]['barcode_box_height']<$sysconf[$plugin_name]['barcode_col_size']?
        array('size'=>$sysconf[$plugin_name]['barcode_box_height']*2.5, 'width'=>50):
@@ -309,6 +315,7 @@ if (isset($_GET['action']) AND $_GET['action'] == 'print') {
        $html_str .= '</div>'."\n";
        $html_str .= '</div>'."\n";
        $html_str .= '</td>'."\n";
+       $n++;
     }
     $html_str .= '</tr>'."\n";
   }
