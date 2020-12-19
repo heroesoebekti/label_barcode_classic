@@ -272,6 +272,7 @@ if (isset($_GET['action']) AND $_GET['action'] == 'print') {
   $html_str .= '<a href="#" onclick="window.print()">Print Again</a>'."\n";
   $html_str .= '<table cellspacing="'.$sysconf[$plugin_name]['barcode_items_margin'].'" cellpadding="2">'."\n";
 
+  $n = 1;
   // loop the chunked arrays to row
   foreach ($chunked_barcode_arrays as $barcode_rows) {
     $html_str .= '<tr>'."\n";
