@@ -80,7 +80,7 @@ $sysconf['plugin']['option'][$plugin_name] = [
         'label' => __('Border Size').' <small><i>(px)</i></small>',
         'type' => 'text',
         'width' => '15',
-        'default' => $sysconf[$plugin_name]['barcode_border_size']??'0'
+        'default' => $sysconf[$plugin_name]['barcode_border_size']??'1'
     ],
     'barcode_border_color' => [
         'dbfield' => 'barcode_border_color',
@@ -202,7 +202,7 @@ $sysconf['plugin']['option'][$plugin_name] = [
         'label' => __('Barcode Scale').' <small><i>(%)</i></small>',
         'type' => 'text',
         'width' => '15',
-        'default' => $sysconf[$plugin_name]['barcode_scale']??'75'
+        'default' => $sysconf[$plugin_name]['barcode_scale']??'70'
     ],
     'barcode_cut_title' => [
         'dbfield' => 'barcode_cut_title',
